@@ -48,7 +48,8 @@ function submit(event) {
     .then(response => response.json())
     .then(data => {
         // Give feedback to user: successful message or error
-        if(data.message){
+        
+        if(!data.error){
             alert(data.message);
         }
         else{
@@ -218,7 +219,7 @@ function gotoId(event) {
             if (!data.error) {
                 readText(id)
                 view.innerHTML = "";
-                view.appendChild(displayIdItem(data.sender, data.recipients, data.subject, data.body, data.timestamp));
+                view.appendChild(displayIdItem(id, data.sender, data.recipients, data.subject, data.body, data.timestamp));
             }
             else {
                 alert(data.error)
@@ -230,7 +231,7 @@ function gotoId(event) {
 
 // Triger: This is the content of each specific mail
 // Methods/Result: creates the require elements needed to display the content to view
-function displayIdItem(sender, recipients, subject, body, timestamp) {
+function displayIdItem(id, sender, recipients, subject, body, timestamp) {
     // container box
     let container = document.createElement('div');
 
@@ -249,7 +250,7 @@ function displayIdItem(sender, recipients, subject, body, timestamp) {
     const reply = document.createElement('button');
     reply.textContent = 'Reply';
     reply.addEventListener('click', () => {
-        reply_email(sender, subject, body, timestamp)
+        reply_email(sender, recipients, subject, body, timestamp)
     })
     container.appendChild(reply);
 
@@ -267,7 +268,7 @@ function displayIdItem(sender, recipients, subject, body, timestamp) {
 
 // Triger: This function fires whenever a reply button is pressed
 // Methods/Result: it switches to compose view and add existing value for resubmission
-function reply_email(sender, subject, body, timestamp) {
+function reply_email(sender, recipients, subject, body, timestamp) {
     document.querySelector('h3').textContent = "Reply Email";
 
     // Show compose view and hide other views
@@ -275,6 +276,7 @@ function reply_email(sender, subject, body, timestamp) {
     document.querySelector('#compose-view').style.display = 'block';
 
     // Clear out composition fields
+    (document.querySelector('#from').value === sender)? sender = recipients : sender = sender;
     document.querySelector('#compose-recipients').value = sender;
     document.querySelector('#compose-subject').value = (subject.startsWith("Re: ")) ? subject : 'Re: ' + subject;
     document.querySelector('#compose-body').value = `On ${timestamp} ${sender} wrote: ${body}`;

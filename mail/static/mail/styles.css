@@ -1,3 +1,7 @@
+body {
+  margin: 0px;
+  color: #555;
+}
 textarea {
   min-height: 400px;
 }
@@ -24,8 +28,10 @@ textarea {
   justify-content: space-between;
   grid-template-columns: 25% 45% 15% 10%;
   width: 100%;
-  padding: 2px;
-  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid teal;
+  border-radius: 5px;
+  margin-bottom: 5px;
   animation-name: remove;
   animation-play-state: paused;
   animation-duration: 3s;
