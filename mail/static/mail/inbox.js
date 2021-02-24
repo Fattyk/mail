@@ -48,12 +48,14 @@ function submit(event) {
     .then(response => response.json())
     .then(data => {
         // Give feedback to user: successful message or error
-        
         if(!data.error){
             alert(data.message);
+            stop()
+            load_mailbox('sent');
         }
         else{
             alert(data.error);
+            stop()
         }
     });
 }
