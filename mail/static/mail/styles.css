@@ -1,0 +1,47 @@
+textarea {
+  min-height: 400px;
+}
+
+@keyframes remove {
+  from {
+    height: 100%;
+    padding: 2px;
+    opacity: 1;
+    margin-bottom: 10px;
+    line-height: 100%;
+  }
+  to {
+    line-height: 0%;
+    height: 0%;
+    padding: 0px;
+    opacity: 0;
+    margin-bottom: 0px;
+  }
+}
+.mailBar {
+  box-sizing: border-box;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 25% 45% 15% 10%;
+  width: 100%;
+  padding: 2px;
+  margin-bottom: 10px;
+  animation-name: remove;
+  animation-play-state: paused;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+.read {
+  background-color: gray;
+  color: white;
+}
+.unread {
+  background-color: white;
+  border-bottom: #666;
+}
+#top-bar {
+  padding: 10px 0px;
+  margin-bottom: 10px;
+  background-color: teal;
+  color: white;
+}
